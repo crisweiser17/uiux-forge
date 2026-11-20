@@ -65,15 +65,14 @@ spacing that scream "an AI made this."
 
 ## 🎬 Demo
 
+_Walkthrough coming soon — the full flow from a confusing screen to variants, the showcase, and the unslopped winner._
+
+<!-- Restore when the real capture is ready:
 <div align="center">
-
-<!-- TODO: replace with the real before→variants→showcase→unslopped capture -->
 <img src="assets/demo.gif" alt="uiux-forge in action" width="640" />
-
 </div>
 
 ## 📸 How it looks
-
 <table>
   <tr>
     <td align="center"><img src="assets/shot-complaint.png" width="260" /><br/><sub>1 · the confusing screen</sub></td>
@@ -86,6 +85,7 @@ spacing that scream "an AI made this."
     <td align="center"><img src="assets/shot-mobile.png" width="260" /><br/><sub>6 · 360px, no sideways scroll</sub></td>
   </tr>
 </table>
+-->
 
 ## 🚀 Quick start
 

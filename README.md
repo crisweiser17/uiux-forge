@@ -65,13 +65,13 @@ spacing that scream "an AI made this."
 
 ## 🎬 Demo
 
-_Walkthrough coming soon — the full flow from a confusing screen to variants, the showcase, and the unslopped winner._
-
-<!-- Restore when the real capture is ready:
 <div align="center">
-<img src="assets/demo.gif" alt="uiux-forge in action" width="640" />
+
+<img src="assets/demo.gif" alt="uiux-forge: a confusing screen → real variants → the showcase with reasons → the unslopped winner" width="760" />
+
 </div>
 
+<!-- Per-stage screenshots (optional — add real app captures later):
 ## 📸 How it looks
 <table>
   <tr>

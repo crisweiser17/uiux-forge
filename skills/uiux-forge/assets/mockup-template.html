@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Screen variants</title>
+<!--
+  Variant mockup: the SAME real data rendered 4-6 ways, one <section id="vN"> per variant.
+  How to use:
+    1. Replace DATA with the real data (DB dump as JSON) + the example the user gave + the worst case.
+    2. Adjust/add functions in VARIANTS (each returns HTML). Keep the current layout as V1.
+    3. Serve on 127.0.0.1 (e.g. php -S 127.0.0.1:8766 -t <folder>) and screenshot each #vN
+       at 1280px and 360px (Playwright: target "#v1", file inside .playwright-mcp/).
+  The examples below are money in/out grouped by entity; swap for the screen's domain.
+-->
+<style>
+:root{--g50:#fafafa;--g100:#f4f4f5;--g200:#e4e4e7;--g300:#d4d4d8;--g500:#71717a;--g700:#3f3f46;--g900:#18181b;--bad:#dc2626;--good:#16a34a;--pill-bg:#fef3c7;--pill-fg:#92400e}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,sans-serif;background:var(--g100);color:var(--g900);font-size:14px}
+.v{background:#fff;border:1px solid var(--g200);border-radius:12px;margin:16px;padding:16px;max-width:1200px}
+.v>h2{margin:0 0 2px;font-size:16px}.v>p.d{margin:0 0 12px;color:var(--g500);font-size:13px}
+.n{font-variant-numeric:tabular-nums;white-space:nowrap;text-align:right}.good{color:var(--good)}.bad{color:var(--bad)}.s{font-size:12px;color:var(--g500)}
+a{color:inherit;text-decoration:underline;text-decoration-color:var(--g300);text-underline-offset:2px}
+.pill{display:inline-block;font-size:11px;font-weight:600;padding:1px 7px;border-radius:999px;background:var(--pill-bg);color:var(--pill-fg)}
+.tag{font-size:11px;padding:0 6px;border-radius:999px;background:var(--g100);color:var(--g500)}
+table{width:100%;border-collapse:collapse}th{font-size:12px;color:var(--g500);text-align:left;font-weight:600;padding:8px 12px;border-bottom:1px solid var(--g200)}td{padding:8px 12px;border-bottom:1px solid var(--g100);vertical-align:top}
+.item{display:flex;justify-content:space-between;gap:12px;padding:3px 0;font-size:13px}
+.card{border:1px solid var(--g200);border-radius:10px;background:#fff;margin-top:8px}
+.card-h{display:flex;justify-content:space-between;gap:12px;align-items:baseline;padding:10px 12px 4px;font-weight:600}
+.card-ctx{display:flex;flex-wrap:wrap;gap:4px 16px;padding:0 12px 8px;font-size:12px;color:var(--g500);border-bottom:1px solid var(--g100)}.card-ctx b{color:var(--g700)}
+.row{display:grid;grid-template-columns:6rem minmax(0,1fr) auto;gap:8px;padding:5px 12px;font-size:13px;align-items:baseline}.row+.row{border-top:1px dashed var(--g100)}
+.day{color:var(--g500);font-size:12px}
+.cols{display:grid;grid-template-columns:1fr 1fr}.cols>div{padding:6px 12px}.cols>div+div{border-left:1px solid var(--g100)}
+.sub{padding:6px 0 2px;font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--g500)}
+@media(max-width:640px){.v{margin:8px;padding:12px}.cols{grid-template-columns:1fr}.cols>div+div{border-left:0;border-top:1px solid var(--g100)}
+ .row{grid-template-columns:minmax(0,1fr) auto}.row .day{grid-column:1/-1}}
+</style></head><body>
+<div id="app"></div>
+<script>
+// ===== DATA: replace with the real data. Include the user's example and the worst case (many items, long name, 1-line group).
+const DATA = {
+  groups: {
+    'P-0040': { title: 'P-0040 · Example client', ctx: { 'Whole order: worth': 30000, 'already received': 20000, 'left to receive': 10000, 'left to pay': 14000 } },
+    'R-026': { title: 'Shipment R-026', note: 'split across P-0038, P-0040', ctx: null },
+  },
+  items: [
+    { group: 'P-0040', day: 'Sat 21/11', in: true, desc: 'Rest on delivery', value: 10000 },
+    { group: 'P-0040', day: 'Wed 18/11', in: false, desc: 'Freight', tag: 'estimated', value: 6800 },
+    { group: 'R-026', day: 'Mon 16/11', in: false, desc: 'Shipment send', value: 737.03 },
+  ],
+};
+
+// ===== Utilities
+const brl = v => 'R$ ' + Math.abs(v).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const signed = v => v === 0 ? '—' : (v > 0 ? '+ ' : '− ') + brl(v);
+const color = v => v < 0 ? 'bad' : v > 0 ? 'good' : '';
+const sum = (l, isIn) => l.filter(i => i.in === isIn).reduce((a, i) => a + i.value, 0);
+const groups = () => {
+  const g = {};
+  for (const i of DATA.items) (g[i.group] ??= []).push(i);
+  return Object.entries(g)
+    .map(([k, l]) => ({ k, l, in: sum(l, true), out: sum(l, false), info: DATA.groups[k] }))
+    .sort((a, b) => (b.in + b.out) - (a.in + a.out)); // what moves the most first
+};
+const value = i => `<span class="n ${i.in ? 'good' : 'bad'}">${i.in ? '+' : '−'} ${brl(i.value)}</span>`;
+const line = i => `<div class="row"><span class="day">${i.day ?? ''}</span><span>${i.desc} ${i.tag ? `<span class="tag">${i.tag}</span>` : ''}</span>${value(i)}</div>`;
+const ctx = g => g.info?.ctx ? `<div class="card-ctx">${Object.entries(g.info.ctx).map(([k, v]) => `<span>${k} <b>${brl(v)}</b></span>`).join('')}</div>` : '';
+const title = g => `${g.info?.title ?? g.k}${g.info?.note ? ` <span class="s">· ${g.info.note}</span>` : ''}`;
+
+// ===== VARIANTS: [title, one-line description, function returning HTML]
+const VARIANTS = [
+  ['V1 · Current: flat list', 'Baseline: how the screen looks today.',
+    () => DATA.items.map(i => `<div class="item"><span>${i.desc} <span class="s">· ${i.group}</span></span>${value(i)}</div>`).join('')],
+  ['V2 · Stacked card per group', 'Group total in the title, whole-group context, items with day.',
+    () => groups().map(g => `<div class="card"><div class="card-h"><span>${title(g)}</span><span class="n ${color(g.in - g.out)}">${signed(g.in - g.out)}</span></div>${ctx(g)}${g.l.map(line).join('')}</div>`).join('')],
+  ['V3 · Card with two columns', 'In in one column, out in the other.',
+    () => groups().map(g => `<div class="card"><div class="card-h"><span>${title(g)}</span><span class="n ${color(g.in - g.out)}">${signed(g.in - g.out)}</span></div>${ctx(g)}<div class="cols">${[true, false].map(isIn => `<div><div class="sub">${isIn ? 'Receive' : 'Pay'}</div>${g.l.filter(i => i.in === isIn).map(i => `<div class="item"><span>${i.desc} <span class="s">${i.day ?? ''}</span></span>${value(i)}</div>`).join('') || '<div class="s">—</div>'}</div>`).join('')}</div></div>`).join('')],
+  ['V4 · Summary table (click expands)', 'One row per group; items only on expand.',
+    () => `<table><thead><tr><th>Group</th><th class="n">Receive</th><th class="n">Pay</th><th class="n">Result</th></tr></thead><tbody>${groups().map(g => `<tr><td>▸ ${title(g)}</td><td class="n good">${g.in ? brl(g.in) : '—'}</td><td class="n bad">${g.out ? brl(g.out) : '—'}</td><td class="n ${color(g.in - g.out)}"><b>${signed(g.in - g.out)}</b></td></tr>`).join('')}</tbody></table>`],
+];
+
+document.getElementById('app').innerHTML = VARIANTS
+  .map(([t, d, f], ix) => `<section class="v" id="v${ix + 1}"><h2>${t}</h2><p class="d">${d}</p>${f()}</section>`)
+  .join('');
+</script></body></html>

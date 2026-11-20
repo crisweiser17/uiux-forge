@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Proposal — winner and why the others lost</title>
+<!--
+  Phase 5 showcase (see references/showcase.md). The winner on top, each discarded variant below
+  with the criterion it failed. Reuse the SAME render functions from the variant mockup — do not
+  rebuild them. Fill WINNER and LOSERS, serve on 127.0.0.1, give the user the URL.
+    WINNER: { title, why, render() }           render() returns the refined winner's HTML
+    LOSERS: [{ title, whyLost, render() }]      one per discarded variant, in ranked order
+-->
+<style>
+:root{--g100:#f4f4f5;--g200:#e4e4e7;--g500:#71717a;--g700:#3f3f46;--g900:#18181b;--win:#2d6bff;--win-bg:#eef3ff;--lose:#b91c1c;--lose-bg:#fef2f2}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,sans-serif;background:var(--g100);color:var(--g900);font-size:14px;line-height:1.45}
+.wrap{max-width:900px;margin:0 auto;padding:24px 16px 64px}
+h1{font-size:20px;margin:0 0 4px}.lead{color:var(--g500);margin:0 0 24px}
+.block{background:#fff;border:1px solid var(--g200);border-radius:12px;margin:16px 0;overflow:hidden}
+.block-h{padding:12px 16px;border-bottom:1px solid var(--g200)}
+.block-t{font-weight:600;font-size:15px;margin:0}
+.badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:2px 8px;border-radius:999px;margin-bottom:6px}
+.win .badge{background:var(--win-bg);color:var(--win)}.lose .badge{background:var(--lose-bg);color:var(--lose)}
+.win{border-color:var(--win);box-shadow:0 0 0 1px var(--win) inset}
+.why{margin:6px 0 0;font-size:13px}.why b{color:var(--g700)}
+.lose .why{color:var(--lose)}
+.render{padding:12px 16px}
+.sec-label{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--g500);margin:32px 0 4px}
+</style></head><body>
+<div class="wrap">
+  <h1 id="h1">Proposal</h1>
+  <p class="lead" id="lead">Logic picked the winner. Here is why — and what the others got wrong. Nothing is beautified yet.</p>
+  <div id="winner"></div>
+  <div class="sec-label">Discarded — and why</div>
+  <div id="losers"></div>
+</div>
+<script>
+// ===== Fill these. render() should return the variant's HTML (reuse the mockup's render functions).
+const WINNER = {
+  title: 'V2 · Stacked card per group',
+  why: 'Answers "how is each one doing?" at a glance: group total in the title, whole-group context, items with day. Borrowed the scannability of V4\'s summary table for the card titles.',
+  render: () => '<div style="color:#71717a">// paste the refined winner render here</div>',
+};
+const LOSERS = [
+  { title: 'V1 · Flat list (current)', whyLost: 'Items from several groups mixed — you cannot sum how much is each one\'s.', render: () => '<div style="color:#71717a">// variant render</div>' },
+  { title: 'V3 · Two columns', whyLost: 'One side lives empty: half the cards show "—" with mismatched heights.', render: () => '<div style="color:#71717a">// variant render</div>' },
+  { title: 'V4 · Summary table', whyLost: 'Extra click to the answer; 4 columns do not fit at 360px.', render: () => '<div style="color:#71717a">// variant render</div>' },
+];
+
+document.getElementById('winner').innerHTML =
+  `<section class="block win"><div class="block-h"><span class="badge">Winner</span>
+     <p class="block-t">${WINNER.title}</p>
+     <p class="why"><b>Why it won:</b> ${WINNER.why}</p></div>
+   <div class="render">${WINNER.render()}</div></section>`;
+
+document.getElementById('losers').innerHTML = LOSERS.map(v =>
+  `<section class="block lose"><div class="block-h"><span class="badge">Cut</span>
+     <p class="block-t">${v.title}</p>
+     <p class="why"><b>Why it lost:</b> ${v.whyLost}</p></div>
+   <div class="render">${v.render()}</div></section>`).join('');
+</script></body></html>

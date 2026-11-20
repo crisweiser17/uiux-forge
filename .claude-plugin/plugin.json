@@ -1,7 +1,7 @@
 {
   "name": "uiux-forge",
   "description": "Logic picks the clearest layout by comparing real variants with real data; you confirm; then an unslop pass makes the winner beautiful",
-  "author": { "name": "Cris Weiser", "url": "https://github.com/crisweiser" },
-  "homepage": "https://github.com/crisweiser/uiux-forge",
+  "author": { "name": "Cris Weiser", "url": "https://github.com/crisweiser17" },
+  "homepage": "https://github.com/crisweiser17/uiux-forge",
   "license": "CC-BY-4.0"
 }

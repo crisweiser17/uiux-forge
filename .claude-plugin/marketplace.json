@@ -1,5 +1,5 @@
 {
-  "name": "crisweiser",
+  "name": "crisweiser17",
   "description": "Rethinks a screen until it tells its story at a glance, then makes it beautiful",
   "owner": { "name": "Cris Weiser" },
   "plugins": [{ "name": "uiux-forge", "source": "./", "description": "Logic picks the clearest layout by comparing real variants; you confirm; then an unslop pass makes the winner beautiful" }]

@@ -6,8 +6,8 @@
 
 **Rethinks a screen until it tells its story at a glance — _then_ makes it beautiful.**
 
-[![Stars](https://img.shields.io/github/stars/crisweiser/uiux-forge?style=flat&color=DAA520)](https://github.com/crisweiser/uiux-forge/stargazers)
-[![Forks](https://img.shields.io/github/forks/crisweiser/uiux-forge?style=flat)](https://github.com/crisweiser/uiux-forge/network/members)
+[![Stars](https://img.shields.io/github/stars/crisweiser17/uiux-forge?style=flat&color=DAA520)](https://github.com/crisweiser17/uiux-forge/stargazers)
+[![Forks](https://img.shields.io/github/forks/crisweiser17/uiux-forge?style=flat)](https://github.com/crisweiser17/uiux-forge/network/members)
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-2D6BFF.svg)](./LICENSE)
 [![Claude Code plugin](https://img.shields.io/badge/Claude%20Code-plugin-FF6B4A.svg)](https://docs.claude.com/en/docs/claude-code)
 
@@ -92,8 +92,8 @@ spacing that scream "an AI made this."
 Install as a [Claude Code](https://docs.claude.com/en/docs/claude-code) plugin:
 
 ```bash
-/plugin marketplace add crisweiser/uiux-forge
-/plugin install uiux-forge@crisweiser
+/plugin marketplace add crisweiser17/uiux-forge
+/plugin install uiux-forge@crisweiser17
 ```
 
 Then just talk to it:
@@ -124,4 +124,4 @@ The aesthetic-pass idea is adapted from [**unslop**](https://github.com/heydamir
 Sokolovsky. uiux-forge adds the structure-first method: real-data variant simulation, the
 "show me why each lost" gate, acceptance tests, and mobile/dark verification.
 
-<div align="center"><sub>Built by <a href="https://github.com/crisweiser">Cris Weiser</a>.</sub></div>
+<div align="center"><sub>Built by <a href="https://github.com/crisweiser17">Cris Weiser</a>.</sub></div>

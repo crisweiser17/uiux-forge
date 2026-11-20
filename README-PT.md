@@ -6,8 +6,8 @@
 
 **Repensa uma tela até ela contar a história numa olhada — _depois_ deixa bonita.**
 
-[![Stars](https://img.shields.io/github/stars/crisweiser/uiux-forge?style=flat&color=DAA520)](https://github.com/crisweiser/uiux-forge/stargazers)
-[![Forks](https://img.shields.io/github/forks/crisweiser/uiux-forge?style=flat)](https://github.com/crisweiser/uiux-forge/network/members)
+[![Stars](https://img.shields.io/github/stars/crisweiser17/uiux-forge?style=flat&color=DAA520)](https://github.com/crisweiser17/uiux-forge/stargazers)
+[![Forks](https://img.shields.io/github/forks/crisweiser17/uiux-forge?style=flat)](https://github.com/crisweiser17/uiux-forge/network/members)
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-2D6BFF.svg)](./LICENSE)
 [![Claude Code plugin](https://img.shields.io/badge/Claude%20Code-plugin-FF6B4A.svg)](https://docs.claude.com/en/docs/claude-code)
 
@@ -66,8 +66,8 @@ ordenados que tiram o gradiente roxo, o glow, o emoji-ícone e o espaçamento de
 Instale como plugin do [Claude Code](https://docs.claude.com/en/docs/claude-code):
 
 ```bash
-/plugin marketplace add crisweiser/uiux-forge
-/plugin install uiux-forge@crisweiser
+/plugin marketplace add crisweiser17/uiux-forge
+/plugin install uiux-forge@crisweiser17
 ```
 
 Depois é só falar com ele:
@@ -85,4 +85,4 @@ simula uns layouts pra esse dashboard e me mostra por que escolheu um
 método estrutura-primeiro: simulação de variantes com dados reais, a vitrine "me mostra por que
 cada um perdeu", testes de aceitação e conferência mobile/escuro.
 
-<div align="center"><sub>Feito por <a href="https://github.com/crisweiser">Cris Weiser</a>.</sub></div>
+<div align="center"><sub>Feito por <a href="https://github.com/crisweiser17">Cris Weiser</a>.</sub></div>
